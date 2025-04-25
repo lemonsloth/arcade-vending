@@ -13,7 +13,7 @@ Sure, winning arcade games is fun and all, but the REAL point of every arcade is
 * Other than my laptop, nothing?
 
 ## Presentation Slides 
-[slides]([slideslink](https://docs.google.com/presentation/d/1KSzQ0fQuwS3C7kYbEdNlXino_Yl0O_45LhLpMbWt0EQ/edit?slide=id.g35134b99228_0_0#slide=id.g35134b99228_0_0))
+[slides]([https://docs.google.com/presentation/d/1KSzQ0fQuwS3C7kYbEdNlXino_Yl0O_45LhLpMbWt0EQ/edit?slide=id.g35134b99228_0_0#slide=id.g35134b99228_0_0])
 
 [Project Files]()
 
