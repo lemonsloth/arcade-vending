@@ -18,19 +18,19 @@
 #include <util/delay.h>			// For delays
 
 // LCD wire connections
-#define rs PB0    	// Command mode (0) data mode (1)
-#define rw PB1    	// Read mode (1) write mode (0)
-#define en PB2    	// Enables data/command transmission
+#define rs PC0    	// Command mode (0) data mode (1)
+#define rw PC1    	// Read mode (1) write mode (0)
+#define en PC2    	// Enables data/command transmission
 #define data PORTD	// AVR PD4-7 <-> LCD DB4-7
 
 // LCD control pins
-#define set_rs    	PORTB |= (1 << rs)
-#define set_rw    	PORTB |= (1 << rw)
-#define set_en    	PORTB |= (1 << en)
+#define set_rs    	PORTC |= (1 << rs)
+#define set_rw    	PORTC |= (1 << rw)
+#define set_en    	PORTC |= (1 << en)
 
-#define clear_rs	PORTB &= ~(1 << rs)
-#define clear_rw	PORTB &= ~(1 << rw)
-#define clear_en	PORTB &= ~(1 << en)
+#define clear_rs	PORTC &= ~(1 << rs)
+#define clear_rw	PORTC &= ~(1 << rw)
+#define clear_en	PORTC &= ~(1 << en)
 
 // LCD
 void lcd_init(void);    	// To initialize lcd.

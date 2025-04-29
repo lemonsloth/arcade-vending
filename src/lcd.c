@@ -142,7 +142,7 @@ void nybble()
 }
 void lcd_init()
 {
-	DDRB |= (1 << rs)
+	DDRC |= (1 << rs)
 	| (1 << rw)
 	| (1 << en);
 	
