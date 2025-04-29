@@ -8,7 +8,6 @@
 
 #ifndef F_CPU
   #define F_CPU 16000000UL
-  #warning "F_CPU not defined! Assuming 16MHz."
 #endif
 
 #include <avr/io.h>
