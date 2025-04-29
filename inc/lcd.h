@@ -43,8 +43,5 @@ void greetings(void);    	// Displays all greeting lines
 void welcome_greeting(void);// Blinks welcome
 void animation(void);    	// Animation!
 
-// PORT
-void INIT_PORT(void);
-
 #endif
 
