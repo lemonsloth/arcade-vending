@@ -11,7 +11,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
-#inlcude "servo.h"
+#include "servo.h"
 
 int main (void)
 {
