@@ -15,7 +15,7 @@
 #include "lcd.h"
 
 //== ASCII art for greetings() ======================================
-char empty_str[] = "            	";
+char empty_str[] = "                ";
 //-------------------------------
 char *welcome[] = {
 	"!THE PRIZE ZONE!",
@@ -29,17 +29,17 @@ char *redeem_flash[] = {
 };
 //-------------------------------
 char *scroll_messages[] = {
-	">> PLUSHIES! 	",
-	">> CANDY!    	",
-	">> KEYCHAINS!	",
-	">> TOYS & FUN!   ",
-	">> PRIZES AWAIT! "
+	">> PLUSHIES!   ",
+	">> CANDY!      ",
+	">> KEYCHAINS!  ",
+	">> TOYS & FUN! ",
+	">> PRIZES AWAIT!"
 };
 //-------------------------------
 char *art_frames[][2] = {
-	{"   * 	* 	*", " * 	*   * 	"},
-	{" * 	*   *	", "   * 	* 	* "},
-	{"   * 	* 	*", " *   * 	*   * "}
+	{"   *  *   *", " *     *   *     "},
+	{" *    *   *   ", "   *    *   * "},
+	{"   *  *   *", " *   *     *   * "}
 };
 // ====================================================================
 
