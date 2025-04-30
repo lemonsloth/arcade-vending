@@ -43,30 +43,35 @@ char *art_frames[][2] = {
 };
 // ====================================================================
 
+extern uint8_t scanned;
 
 // ====================================================================
 void greetings()
 {
 	lcd_cmd(0x01);    	// Clear screen
 	lcd_cmd(0x80);    	// Reset cursor
-    
+	
+	if(scanned) return;
 	welcome_greeting();
+	if(scanned) return;
 	animation();
-    
+	if(scanned) return;
 	// Redeem string
 	for (int i = 0; i < 2; i++)
 	{
-    	display_two_lines(redeem_flash[i%2],
-     	empty_str);
-    	_delay_ms(300);
-   	 
-    	// Art animation
-    	for (int i = 0; i < 3; i++)
-    	{
-        	display_two_lines(art_frames[i][0],
-         	art_frames[i][1]);
-        	_delay_ms(10);
-    	}
+		if(scanned) return;
+		display_two_lines(redeem_flash[i%2],
+		empty_str);
+		_delay_ms(300);
+		
+		// Art animation
+		for (int i = 0; i < 3; i++)
+		{
+			if(scanned) return;
+			display_two_lines(art_frames[i][0],
+			art_frames[i][1]);
+			_delay_ms(10);
+		}
 	}
 
 	// Scrolling messages
@@ -74,9 +79,10 @@ void greetings()
 	lcd_str("<< TAP TO CLAIM!");
 	for (int i = 0; i < 5; i++)
 	{
-    	lcd_cmd(0x80);                	// Reset cursor to first line
-    	lcd_str(scroll_messages[i]);	// Scroll through messages
-    	_delay_ms(350);
+		if(scanned) return;
+		lcd_cmd(0x80);                	// Reset cursor to first line
+		lcd_str(scroll_messages[i]);	// Scroll through messages
+		_delay_ms(350);
 	}
 }
 // ---------------------------------------------------------------------
