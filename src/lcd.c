@@ -154,7 +154,7 @@ void lcd_init()
 	
 	DDRD = 0xF0;	// lower 4 bits for data
 	
-	data = 0x30;	// Wakeup command
+	data_reg = 0x30;// Wakeup command
 	_delay_ms(5);	// Toggle en
 	nybble();    	// busy
 	_delay_us(160);	// Toggle en
@@ -163,7 +163,7 @@ void lcd_init()
 	nybble();    	// busy
 	_delay_us(160);	// Toggle en
 	
-	data = 0x20;	// Put this here for 4-bit init (per datasheet)
+	data_reg = 0x20;// Put this here for 4-bit init (per datasheet)
 	nybble();    	// Toggle en
 	
 	lcd_cmd(0x28);	// Function set: 4-bit/2-line
@@ -175,22 +175,22 @@ void lcd_init()
 }
 void lcd_cmd(char cmd_out)
 {
-	data = (cmd_out & 0xF0); //send the cmd_out to data
+	data_reg = (cmd_out & 0xF0); //send the cmd_out to data
 	clear_rs;            	// Send instruction
 	clear_rw;            	// Write
 	nybble();            	// Toggle en
 	cmd_out = cmd_out << 4;	// Shift over by 4 bits
-	data = (cmd_out & 0xF0);// Put data on output port
+	data_reg = (cmd_out & 0xF0);// Put data on output port
 	nybble();            	// Toggle en
 }
 void lcd_data(char data_out)
 {
-	data = (data_out & 0xF0);    	//send the data_out to data
+	data_reg = (data_out & 0xF0);    	//send the data_out to data
 	set_rs;                	// Send data
 	clear_rw;            	// Write
 	nybble();            	// Toggle en
 	data_out = data_out << 4;	// Shift over by 4 bits
-	data = (data_out & 0xF0);    	// Put data on output port
+	data_reg = (data_out & 0xF0);    	// Put data on output port
 	nybble();            	// Toggle en
 }
 void lcd_str(char *str)
