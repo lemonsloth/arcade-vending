@@ -21,7 +21,7 @@
 #define rs PC0    	// Command mode (0) data mode (1)
 #define rw PC1    	// Read mode (1) write mode (0)
 #define en PC2    	// Enables data/command transmission
-#define lcd_data PORTD	// AVR PD4-7 <-> LCD DB4-7
+#define data_reg PORTD	// AVR PD4-7 <-> LCD DB4-7
 
 // LCD control pins
 #define set_rs    	PORTC |= (1 << rs)
