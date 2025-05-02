@@ -13,6 +13,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include "lcd.h"
+#include "mfrc522.h"
 
 //== ASCII art for greetings() ======================================
 char empty_str[] = "                ";
@@ -42,36 +43,50 @@ char *art_frames[][2] = {
 	{"   *  *   *", " *   *     *   * "}
 };
 // ====================================================================
-
-extern uint8_t scanned;
+uint8_t scanned = 0;
 
 // ====================================================================
 void greetings()
 {
 	lcd_cmd(0x01);    	// Clear screen
 	lcd_cmd(0x80);    	// Reset cursor
-	
-	if(scanned) return;
+    
 	welcome_greeting();
-	if(scanned) return;
+	if(poll_for_card())
+	{
+		scanned = 1;
+		return;
+	}
 	animation();
-	if(scanned) return;
+    if(poll_for_card())
+    {
+	    scanned = 1;
+	    return;
+    }
 	// Redeem string
 	for (int i = 0; i < 2; i++)
 	{
-		if(scanned) return;
-		display_two_lines(redeem_flash[i%2],
-		empty_str);
-		_delay_ms(300);
-		
-		// Art animation
-		for (int i = 0; i < 3; i++)
+		if(poll_for_card())
 		{
-			if(scanned) return;
-			display_two_lines(art_frames[i][0],
-			art_frames[i][1]);
-			_delay_ms(10);
+			scanned = 1;
+			return;
 		}
+    	display_two_lines(redeem_flash[i%2],
+     	empty_str);
+    	_delay_ms(300);
+   	 
+    	// Art animation
+    	for (int i = 0; i < 3; i++)
+    	{
+			if(poll_for_card())
+			{
+				scanned = 1;
+				return;
+			}
+        	display_two_lines(art_frames[i][0],
+         	art_frames[i][1]);
+        	_delay_ms(10);
+    	}
 	}
 
 	// Scrolling messages
@@ -79,10 +94,14 @@ void greetings()
 	lcd_str("<< TAP TO CLAIM!");
 	for (int i = 0; i < 5; i++)
 	{
-		if(scanned) return;
-		lcd_cmd(0x80);                	// Reset cursor to first line
-		lcd_str(scroll_messages[i]);	// Scroll through messages
-		_delay_ms(350);
+		if(poll_for_card())
+		{
+			scanned = 1;
+			return;
+		}
+    	lcd_cmd(0x80);                	// Reset cursor to first line
+    	lcd_str(scroll_messages[i]);	// Scroll through messages
+    	_delay_ms(350);
 	}
 }
 // ---------------------------------------------------------------------
@@ -154,7 +173,9 @@ void lcd_init()
 	
 	DDRD = 0xF0;	// lower 4 bits for data
 	
-	data_reg = 0x30;// Wakeup command
+	_delay_ms(200);
+	
+	data_reg = 0x30;	// Wakeup command
 	_delay_ms(5);	// Toggle en
 	nybble();    	// busy
 	_delay_us(160);	// Toggle en
@@ -163,7 +184,7 @@ void lcd_init()
 	nybble();    	// busy
 	_delay_us(160);	// Toggle en
 	
-	data_reg = 0x20;// Put this here for 4-bit init (per datasheet)
+	data_reg = 0x20;	// Put this here for 4-bit init (per datasheet)
 	nybble();    	// Toggle en
 	
 	lcd_cmd(0x28);	// Function set: 4-bit/2-line
