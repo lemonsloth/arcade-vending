@@ -43,5 +43,7 @@ void greetings(void);    	// Displays all greeting lines
 void welcome_greeting(void);// Blinks welcome
 void animation(void);    	// Animation!
 
+extern uint8_t scanned;
+
 #endif
 
