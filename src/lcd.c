@@ -15,147 +15,13 @@
 #include "lcd.h"
 #include "mfrc522.h"
 
-//== ASCII art for greetings() ======================================
-char empty_str[] = "                ";
-//-------------------------------
-char *welcome[] = {
-	"!THE PRIZE ZONE!",
-	empty_str,
-	"** WELCOME TO **"
-};
-//-------------------------------
-char *redeem_flash[] = {
-	"? GOT TICKETS ? ",
-	"REDEEM HERE NOW!"
-};
-//-------------------------------
-char *scroll_messages[] = {
-	">> PLUSHIES!   ",
-	">> CANDY!      ",
-	">> KEYCHAINS!  ",
-	">> TOYS & FUN! ",
-	">> PRIZES AWAIT!"
-};
-//-------------------------------
-char *art_frames[][2] = {
-	{"   *  *   *", " *     *   *     "},
-	{" *    *   *   ", "   *    *   * "},
-	{"   *  *   *", " *   *     *   * "}
-};
-// ====================================================================
-uint8_t scanned = 0;
-
-// ====================================================================
-void greetings()
+void display_two_lines(const char *line1, const char *line2) 
 {
-	lcd_cmd(0x01);    	// Clear screen
-	lcd_cmd(0x80);    	// Reset cursor
-    
-	welcome_greeting();
-	if(poll_for_card())
-	{
-		scanned = 1;
-		return;
-	}
-	animation();
-    if(poll_for_card())
-    {
-	    scanned = 1;
-	    return;
-    }
-	// Redeem string
-	for (int i = 0; i < 2; i++)
-	{
-		if(poll_for_card())
-		{
-			scanned = 1;
-			return;
-		}
-    	display_two_lines(redeem_flash[i%2],
-     	empty_str);
-    	_delay_ms(300);
-   	 
-    	// Art animation
-    	for (int i = 0; i < 3; i++)
-    	{
-			if(poll_for_card())
-			{
-				scanned = 1;
-				return;
-			}
-        	display_two_lines(art_frames[i][0],
-         	art_frames[i][1]);
-        	_delay_ms(10);
-    	}
-	}
-
-	// Scrolling messages
-	lcd_cmd(0xC0);                    	// Put next message on second line
-	lcd_str("<< TAP TO CLAIM!");
-	for (int i = 0; i < 5; i++)
-	{
-		if(poll_for_card())
-		{
-			scanned = 1;
-			return;
-		}
-    	lcd_cmd(0x80);                	// Reset cursor to first line
-    	lcd_str(scroll_messages[i]);	// Scroll through messages
-    	_delay_ms(350);
-	}
-}
-// ---------------------------------------------------------------------
-void welcome_greeting()
-{    
-	lcd_str(welcome[2]);
-	for(int i = 0; i <= 6; i++)
-	{
-    	lcd_cmd(0xC0);    	// Second line
-    	lcd_str(welcome[i%2]);
-    	_delay_ms(150);
-	}
-}
-// ---------------------------------------------------------------------
-void animation()
-{
-	const char message[] = "** WELCOME TO **";
-	uint8_t length = 16;
-
-	for (uint8_t i = 0; i <= length; i++)
-	{
-    	lcd_cmd(0x80); // First row start
-
-    	// Spaces where text has been "eaten"
-    	for (uint8_t j = 0; j < i; j++)
-    	{
-        	lcd_data(' ');
-    	}
-
-    	lcd_data('<');	// Little guy
-
-    	// Remaining characters
-    	for (uint8_t j = i + 1; j <= length; j++)
-    	{
-        	lcd_data(message[j]);
-    	}
-
-    	// Fill rest of line with spaces
-    	for (uint8_t j = length + 2; j < 16; j++)
-    	{
-        	lcd_data(' ');
-    	}
-
-    	_delay_ms(30);
-	}
-
-	_delay_ms(100);
-}
-// ====================================================================
-
-void display_two_lines(char *line1, char *line2) {
-	lcd_cmd(0x01); // Clear
-	lcd_cmd(0x80); lcd_str(line1);
-	lcd_cmd(0xC0); lcd_str(line2);
+	lcd_clear();
+	lcd_cmd(0x80); 
+	lcd_str(line1);
+	lcd_cmd(0xC0); 
+	lcd_str(line2);
 	_delay_ms(100);
 }
 
@@ -189,7 +55,7 @@ void lcd_init()
 	
 	lcd_cmd(0x28);	// Function set: 4-bit/2-line
 	lcd_cmd(0x0E);	// Display ON; Cursor ON
-	lcd_cmd(0x01);	// Clear screen
+	lcd_clear();	// Clear screen
 	lcd_cmd(0x80);	// Set cursor position
 	
 	_delay_ms(10);
@@ -214,7 +80,7 @@ void lcd_data(char data_out)
 	data_reg = (data_out & 0xF0);    	// Put data on output port
 	nybble();            	// Toggle en
 }
-void lcd_str(char *str)
+void lcd_str(const char *str)
 {
 	unsigned int i=0;
 	while(str[i]!='\0')
@@ -222,4 +88,8 @@ void lcd_str(char *str)
 		lcd_data(str[i]);
 		i++;
 	}
+}
+void lcd_clear()
+{
+	lcd_cmd(0x01);
 }
