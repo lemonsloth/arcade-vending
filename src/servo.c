@@ -18,13 +18,13 @@
     
 void servo_init(void)
 {
-	DDRB |= (1 << PORTB1)	// PB1 = OC1A; OC1A -> Servo 1 input
-	| (1 << PORTB2);		// PB2 = OC1B; OC1B -> Servo 2 input
+	DDRB |= (1 << PORTB1);	// PB1 = OC1A; OC1A -> Servo 1 input
+	//| (1 << PORTB2);		// PB2 = OC1B; OC1B -> Servo 2 input
 	
 	TCCR1A |= (1 << COM1A1)	// Clear OC1A on compare match
 	| (1 << WGM11);        	// Fast PWM w/ ICR1 as TOP
     
-	TCCR1A |= (1 << COM1B1);// Clear OC1B on compare match
+	//TCCR1A |= (1 << COM1B1);// Clear OC1B on compare match
     
 	TCCR1B |= (1 << WGM13) | (1 << WGM12)	// Fast PWM w/ ICR1 as TOP
 	| (1 << CS11);                        	// Prescaler: 8
@@ -41,9 +41,9 @@ void servo_open(uint8_t servo)
     	case 1:
         	OCR1A = 500;
         	break;
-    	case 2:
-        	OCR1B = 500;
-        	break;
+//     	case 2:
+//         	OCR1B = 500;
+//         	break;
     	default:
         	break;
         	//servo error?
@@ -57,9 +57,9 @@ void servo_close(uint8_t servo)
     	case 1:
         	OCR1A = 2500;
         	break;
-    	case 2:
-        	OCR1B = 2500;
-        	break;
+//     	case 2:
+//         	OCR1B = 2500;
+//         	break;
     	default:
         	;
     	//servo error?

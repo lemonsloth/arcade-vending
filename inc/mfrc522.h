@@ -24,14 +24,15 @@
 #define MFRC522_H
 
 #include <stdint.h>
-#include <mfrc522_cmd.h>
-#include <mfrc522_reg.h>
+#include "mfrc522_cmd.h"
+#include "mfrc522_reg.h"
 
 #define CARD_FOUND		1
 #define CARD_NOT_FOUND	2
 #define ERROR			3
 
 #define MAX_LEN			16
+#define UID_LEN			4
 
 //Card types
 #define Mifare_UltraLight 	0x4400
@@ -57,10 +58,10 @@
 
 void mfrc522_init();
 void mfrc522_reset();
-void mfrc522_write(uint8_t reg, uint8_t data);
+void mfrc522_write(uint8_t reg, uint8_t data1);
 uint8_t mfrc522_read(uint8_t reg);
 uint8_t	mfrc522_request(uint8_t req_mode, uint8_t * tag_type);
 uint8_t mfrc522_to_card(uint8_t cmd, uint8_t *send_data, uint8_t send_data_len, uint8_t *back_data, uint32_t *back_data_len);
 uint8_t mfrc522_get_card_serial(uint8_t * serial_out);
-
+uint8_t poll_for_card(void);
 #endif

@@ -36,4 +36,12 @@
 #define MFAuthent_CMD			0x0E
 #define SoftReset_CMD			0x0F
 
+// Command Definitions
+#define PICC_REQIDL          0x26
+#define PICC_ANTICOLL        0x93
+#define PICC_AUTHENT1A       0x60
+#define PICC_READ            0x30
+#define PCD_IDLE             0x00
+#define PCD_TRANSCEIVE       0x0C
+
 #endif
