@@ -36,13 +36,10 @@
 void lcd_init(void);    	// To initialize lcd.
 void lcd_cmd(char cmd_out); // To send command to lcd.
 void lcd_data(char data_out); // To send data to lcd.
-void lcd_str(char *str);	// To send string, basically stripping each character and sending.
+void lcd_str(const char *str);	// To send string, basically stripping each character and sending.
 void nybble();            	// Toggles en
-void display_two_lines();	// Displays two lines
-void greetings(void);    	// Displays all greeting lines
-void welcome_greeting(void);// Blinks welcome
-void animation(void);    	// Animation!
+void lcd_clear();			// Clears LED
+void display_two_lines(const char*, const char*);// Displays value on 
 
-extern uint8_t scanned;
 #endif
 
