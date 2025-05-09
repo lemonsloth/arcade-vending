@@ -20,11 +20,11 @@
  * 
  * 
  */
-#include <mfrc522.h>
-#include <spi.h>
+#include "mfrc522.h"
+#include "spi.h"
 
 #if 1
-#include <lcd.h>
+#include "lcd.h"
 #endif
 
 void mfrc522_init()
@@ -46,22 +46,22 @@ void mfrc522_init()
 	}
 }
 
-void mfrc522_write(uint8_t reg, uint8_t data)
+void mfrc522_write(uint8_t reg, uint8_t data1)
 {
 	ENABLE_CHIP();
 	spi_transmit((reg<<1)&0x7E);
-	spi_transmit(data);
+	spi_transmit(data1);
 	DISABLE_CHIP();
 }
 
 uint8_t mfrc522_read(uint8_t reg)
 {
-	uint8_t data;	
+	uint8_t data1;	
 	ENABLE_CHIP();
 	spi_transmit(((reg<<1)&0x7E)|0x80);
-	data = spi_transmit(0x00);
+	data1 = spi_transmit(0x00);
 	DISABLE_CHIP();
-	return data;
+	return data1;
 }
 
 void mfrc522_reset()
@@ -203,7 +203,6 @@ uint8_t mfrc522_to_card(uint8_t cmd, uint8_t *send_data, uint8_t send_data_len, 
     return status;
 }
 
-
 uint8_t mfrc522_get_card_serial(uint8_t * serial_out)
 {
 	uint8_t status;
@@ -230,4 +229,33 @@ uint8_t mfrc522_get_card_serial(uint8_t * serial_out)
 		}
     }
     return status;
+}
+
+
+//  added
+uint8_t poll_for_card(void)
+{
+	uint8_t status;
+	uint8_t tag_type[2];
+	//uint8_t uid[5];
+
+	status = mfrc522_request(PICC_REQIDL, tag_type);
+	if (status == CARD_FOUND)
+	{
+		return 1;
+		// 		status = mfrc522_get_card_serial(uid);
+		// 		if (status == CARD_FOUND)
+		// 		{
+		// 			lcd_cmd(0x01);
+		// 			lcd_str("UID: ");
+		// 			for (int i = 0; i < 4; i++)
+		// 			{
+		// 				char uid_buff[4];
+		// 				itoa(uid[i], uid_buff, 16);
+		// 				lcd_str(uid_buff);
+		// 				lcd_data(' ');
+		// 			}
+		// 		}
+	}
+	return 0;
 }
