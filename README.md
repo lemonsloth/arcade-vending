@@ -1,15 +1,14 @@
 ![License](https://img.shields.io/github/license/lemonsloth/arcade-vending)
 ![Last Commit](https://img.shields.io/github/last-commit/lemonsloth/arcade-vending)
-![MCU](https://img.shields.io/badge/MCU-ATmega32U4-blue)
+![MCU](https://img.shields.io/badge/MCU-ATmega328PB-blue)
 ![Protocol](https://img.shields.io/badge/protocol-SPI-orange)
 ![Hardware](https://img.shields.io/badge/hardware-RFID-yellow)
-![Hardware](https://img.shields.io/badge/hardware-LCD-yellow)
-![Hardware](https://img.shields.io/badge/hardware-Servo-yellow)
 ![Build](https://img.shields.io/badge/build-make-critical)
 
 ---
 
 # Arcade Prize Dispenser
+
 Awarded 3rd Place in UNLV's Spring 2025 Junior Design Competition
 
 Sure, winning arcade games is fun and all, but the REAL point of every arcade is to win amazing prizes! With this project, we will design our own prize dispensing machine.
@@ -29,6 +28,7 @@ It demonstrates my foundational understanding of hardware, software, and soft sk
 | **Soft skills**            | Communication, project management, team leadership                      |
 
 ## Features
+
 - Entices patrons to tap their cards in order to redeem prizes.
 - Greets users and displays prize options, user info, and balance.
 - Reads account information: UID and balance.
@@ -38,6 +38,7 @@ It demonstrates my foundational understanding of hardware, software, and soft sk
 - Physical vending machine prototype.
 
 ## Hardware
+
 | Component                         | Model                 |
 |-----------------------------------|-----------------------|
 | **MCU**                           | ATmega328PB           |
@@ -63,7 +64,6 @@ Demo Videos
 
 PPT & demo presented by Caleb @ the UNLV Spring 2025 Junior Design Competition
 - [Slides](https://docs.google.com/presentation/d/1E5TsQLzwDdy7lnNvE0u5rrdVZENRvXk2xeuqn8TQu58/edit?usp=sharing)
-- [Live demo]()
 
 Prototype
 ![demo](docs/demo.png)
@@ -86,7 +86,7 @@ Prototype
 
 Built by Caleb Rollf and Lazaro Hernandez at UNLV.
 Lazaro - KiCad schematic
-Caleb  - Team lead, component selection, ciruit designer, firmware, testing, prototyping, built vending machine.
+Caleb  - Team lead, component selection, circuit designer, firmware, testing, prototyping, built vending machine.
 
 # License
 
