@@ -6,26 +6,25 @@
 ![Hardware](https://img.shields.io/badge/hardware-LCD-yellow)
 ![Hardware](https://img.shields.io/badge/hardware-Servo-yellow)
 ![Build](https://img.shields.io/badge/build-make-critical)
-![Status](https://img.shields.io/badge/status-WIP-lightgrey)
 
 ---
 
 # Arcade Prize Dispenser
 Awarded 3rd Place in UNLV's Spring 2025 Junior Design Competition
 
-Sure, winning arcade games is fun and all, but the REAL point of every arcade is to win amazing prizes! With this project, we will design our own prize dispensing machine utilizing the ATmega328p as the brain of the project.
+Sure, winning arcade games is fun and all, but the REAL point of every arcade is to win amazing prizes! With this project, we will design our own prize dispensing machine.
 
-# Overview
+## Overview
 
 This project implements an arcade-style vending machine using an ATmega328PB and peripherals including an RFID scanner, LCD module, servo motors, buttons, variable voltage regulator, and logic level shifter. 
 
-It demonstrates my foundational understanding of both hardware, software, and soft skills essential for embedded systems engineering.
+It demonstrates my foundational understanding of hardware, software, and soft skills essential for embedded systems engineering.
 
 | Category                   | Skill                                                                   |
 |----------------------------|-------------------------------------------------------------------------|
 | **Embedded concepts**      | SPI, GPIO, PWM, interrupts, timers, register-level hardware control     |
 | **Testing tools**          | Multimeter, logic / protocol analyzer                                   |
-| **Prototyping process**    | Circuit design, breadboarding, wiring                                   |
+| **Prototyping**            | Circuit design, breadboarding, wiring                                   |
 | **Version control**        | Command-line git + team collaboration                                   |
 | **Soft skills**            | Communication, project management, team leadership                      |
 
@@ -51,18 +50,44 @@ It demonstrates my foundational understanding of both hardware, software, and so
 
 ## Software
 
-Language: C
-Interfaces: SPI
+- Language: C
+- Interfaces: SPI
 
 ## Demo
 
-- [Demo Video - #]()
-- [Demo Video - #]()
-- [Demo Video - #]()
+Demo Videos
+- [LCD](https://www.youtubeeducation.com/watch?v=tnAiG96I_e0)
+- [Scan & Dispense](https://www.youtubeeducation.com/watch?v=37mdu5VPBdY)
+- [UID Read Test](https://www.youtubeeducation.com/watch?v=KdDl2COk-yc)
+- [Balance Test](https://www.youtubeeducation.com/watch?v=Puljs5DEOWs)
 
-PPT Presented @ the UNLV Spring 2025 Junior Design Competition
-- [Slides](https://docs.google.com/presentation/d/1E5TsQLzwDdy7lnNvE0u5rrdVZENRvXk2xeuqn8TQu58/edit?usp=drive_link)
+PPT & demo presented by Caleb @ the UNLV Spring 2025 Junior Design Competition
+- [Slides](https://docs.google.com/presentation/d/1E5TsQLzwDdy7lnNvE0u5rrdVZENRvXk2xeuqn8TQu58/edit?usp=sharing)
+- [Live demo]()
 
-## License
+Prototype
+![demo](docs/demo.png)
+
+## Project structure
+
+📁 `docs/ -- resources, media`
+
+📁 `examples/ -- example C code for testing`
+
+📁 `hardware/ -- schematics (Lazaro)`
+
+📁 `inc/ -- headers`
+
+📁 `src/ -- C source files`
+
+📁 `make/ -- Makefiles`
+
+## Credits
+
+Built by Caleb Rollf and Lazaro Hernandez at UNLV.
+Lazaro - KiCad schematic
+Caleb  - Team lead, component selection, ciruit designer, firmware, testing, prototyping, built vending machine.
+
+# License
 
 This project is licensed under the [MIT License](LICENSE).
