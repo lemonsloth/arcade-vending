@@ -18,7 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- * 
+ * Modifications by Caleb Rollf, 2025:
+ * - Added poll_for_card() function to implement card polling.
  */
 #include "mfrc522.h"
 #include "spi.h"

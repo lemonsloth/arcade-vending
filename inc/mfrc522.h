@@ -19,6 +19,8 @@
  * MA 02110-1301, USA.
  * 
  * 
+ * Modifications by Caleb Rollf, 2025:
+ * - Added poll_for_card() function to implement card polling. 
  */
 #ifndef MFRC522_H
 #define MFRC522_H
